@@ -64,12 +64,12 @@ function function_formatter ( fn, minimal ) {
     if ( minimal )
 	return `${name}(${fn.length} ` + (fn.length === 1 ? "arg)" : "args)");
 
-    const args				= fn.toString().match(/\((.*?)\)/)[1]
+    const args				= fn.toString().match(/\((.*?)\)/);
 
-    return `${name}(${args}) { \u2026 }`;
+    return `${name}(${args ? args[1] : ''}) { \u2026 }`;
 }
 
-function repr ( value, minimal = false ) {
+export function repr ( value, minimal = false ) {
     // Input types
     //
     //   - Map
@@ -131,4 +131,4 @@ repr.logging				= () => {
     debug				= true;
 }
 
-module.exports = repr;
+export default repr;

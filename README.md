@@ -19,13 +19,14 @@ The main use-case for this library is expected to be for logging.
 
 - Distinguish primitive types from their similar object version
 - Truncate large list types
-- Display formats for Map types:
-  - Boolean, Number, String, Date, RegExp, Function, Object
-- Display formats for List types:
-  - Array, Int8Array, Uint8Array, Uint8ClampedArray, Int16Array, Uint16Array, Int32Array,
-    Uint32Array, Float32Array, Float64Array, BigInt64Array, BigUint64Array
-- Display formats for Primitives:
-  - string, number, bigint, boolean, null, undefined, symbol
+- Support for
+  - Map types:
+    - Boolean, Number, String, Date, RegExp, Function, Object
+  - List types:
+    - Array, Int8Array, Uint8Array, Uint8ClampedArray, Int16Array, Uint16Array, Int32Array,
+      Uint32Array, Float32Array, Float64Array, BigInt64Array, BigUint64Array
+  - Primitive types:
+    - string, number, bigint, boolean, null, undefined, symbol
 - Custom object formatting by implementing a `toRepr()` method.
 
 

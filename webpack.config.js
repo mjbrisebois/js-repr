@@ -1,19 +1,47 @@
-const webpack			= require('webpack');
 
-module.exports = {
-    target: 'node',
-    mode: 'production', // production | development
-    entry: [ './src/index.js' ],
-    output: {
-	filename: 'repr.bundled.js',
-	globalObject: 'this',
-	library: {
-	    "name": "repr",
-	    "type": "umd",
+import webpack			from 'webpack';
+import TerserPlugin		from 'terser-webpack-plugin';
+
+
+const MODE			= process.env.MODE || "development";
+const FILENAME			= process.env.FILENAME || "repr.bundled";
+const FILEEXT			= MODE === "production" ? "min.js" : "js";
+
+
+export default {
+    "target":	"web",
+    "mode":	MODE,
+    "entry": {
+	"main": {
+	    "import":	"./src/index.js",
+	    "filename":	`${FILENAME}.${FILEEXT}`,
+	    "library": {
+		"type":	"module",
+	    },
 	},
     },
-    stats: {
-	colors: true
+    "resolve": {
+	"mainFields": [ "module", "browser", "main" ],
     },
-    devtool: 'source-map',
+    "experiments": {
+	"outputModule":	true,
+    },
+    "optimization": {
+	"minimizer": [
+	    new TerserPlugin({
+		"terserOptions": {
+		    "keep_classnames": true,
+		},
+	    }),
+	],
+    },
+    "devtool":	"source-map",
+    "stats": {
+	"colors": true,
+    },
+    "plugins": [
+        new webpack.optimize.LimitChunkCountPlugin({
+	    "maxChunks": 1,
+	}),
+    ],
 };
